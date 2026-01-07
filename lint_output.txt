@@ -1,0 +1,143 @@
+
+> psuic-system@0.1.0 lint
+> eslint
+
+
+/Users/mumu/Desktop/Project PSUIC/src/app/(user)/dashboard/page.tsx
+   8:30  warning  'CheckCircle' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      @typescript-eslint/no-unused-vars
+  12:38  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+  13:44  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+  14:54  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+  23:9   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/mumu/Desktop/Project PSUIC/src/app/(user)/dashboard/page.tsx:23:9
+  21 |         }
+  22 |         const userData = JSON.parse(session);
+> 23 |         setUser(userData);
+     |         ^^^^^^^ Avoid calling setState() directly within an effect
+  24 |
+  25 |         fetch(`/api/tickets?userId=${userData.id}`)
+  26 |             .then(res => res.json())  react-hooks/set-state-in-effect
+
+/Users/mumu/Desktop/Project PSUIC/src/app/admin/dashboard/page.tsx
+  5:8  warning  'Link' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mumu/Desktop/Project PSUIC/src/app/admin/rooms/page.tsx
+  8:11  warning  'router' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  9:40  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+/Users/mumu/Desktop/Project PSUIC/src/app/admin/users/page.tsx
+  7:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/mumu/Desktop/Project PSUIC/src/app/api/knowledge-base/route.ts
+  27:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+  44:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mumu/Desktop/Project PSUIC/src/app/api/rooms/route.ts
+  30:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mumu/Desktop/Project PSUIC/src/app/api/schedule/route.ts
+  5:27  warning  'request' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mumu/Desktop/Project PSUIC/src/app/api/tickets/route.ts
+  16:50  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  29:14  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+  97:27  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/mumu/Desktop/Project PSUIC/src/app/api/users/route.ts
+  11:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+  27:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+/Users/mumu/Desktop/Project PSUIC/src/app/it/dashboard/page.tsx
+  25:11  warning  'getStatusColor' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+/Users/mumu/Desktop/Project PSUIC/src/app/it/ticket/[id]/page.tsx
+   9:11  warning  'router' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  10:42  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  47:63  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+/Users/mumu/Desktop/Project PSUIC/src/app/login/page.tsx
+   5:8   warning  'Image' is defined but never used  @typescript-eslint/no-unused-vars
+  36:18  warning  'err' is defined but never used    @typescript-eslint/no-unused-vars
+
+/Users/mumu/Desktop/Project PSUIC/src/components/AnalyticsDashboard.tsx
+   4:8   warning  'Link' is defined but never used          @typescript-eslint/no-unused-vars
+   8:40  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  21:33  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  87:60  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  92:65  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/Users/mumu/Desktop/Project PSUIC/src/components/DashboardLayout.tsx
+  15:5   warning  'User' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+  16:5   warning  'Settings' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+  17:5   warning  'Calendar' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+  32:38  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           @typescript-eslint/no-explicit-any
+  40:9   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+/Users/mumu/Desktop/Project PSUIC/src/components/DashboardLayout.tsx:40:9
+  38 |             return;
+  39 |         }
+> 40 |         setUser(JSON.parse(session));
+     |         ^^^^^^^ Avoid calling setState() directly within an effect
+  41 |
+  42 |         // Auto-close sidebar on mobile
+  43 |         const handleResize = () => {  react-hooks/set-state-in-effect
+  65:15  warning  'common' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+
+/Users/mumu/Desktop/Project PSUIC/src/components/ITSchedule.tsx
+  15:12  warning  'loading' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  18:9   error    Error: Cannot access variable before it is declared
+
+`fetchSchedule` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+/Users/mumu/Desktop/Project PSUIC/src/components/ITSchedule.tsx:18:9
+  16 |
+  17 |     useEffect(() => {
+> 18 |         fetchSchedule();
+     |         ^^^^^^^^^^^^^ `fetchSchedule` accessed before it is declared
+  19 |     }, []);
+  20 |
+  21 |     const fetchSchedule = () => {
+
+/Users/mumu/Desktop/Project PSUIC/src/components/ITSchedule.tsx:21:5
+  19 |     }, []);
+  20 |
+> 21 |     const fetchSchedule = () => {
+     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 22 |         fetch('/api/schedule')
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 23 |             .then(res => res.json())
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |             .then(data => {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 25 |                 setSchedules(data);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 26 |                 setLoading(false);
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 27 |             });
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 28 |     };
+     | ^^^^^^^ `fetchSchedule` is declared here
+  29 |
+  30 |     const handleAddSlot = async (dayOffset: number, hour: number) => {
+  31 |         // Calculate date for the clicked slot  react-hooks/immutability
+  67:31  warning  'i' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+
+/Users/mumu/Desktop/Project PSUIC/src/components/RatingModal.tsx
+  29:86   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  29:100  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+✖ 40 problems (19 errors, 21 warnings)
+

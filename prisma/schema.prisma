@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Enums removed - using Strings
+
+// Models
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique @default("temp_user") // Default needed for migration, removed later if needed
+  email     String   @unique
+  name      String?
+  role      String     @default("STUDENT") // STUDENT, IT_STAFF, ADMIN
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  ticketsCreated Ticket[] @relation("CreatedTickets")
+  ticketsAssigned Ticket[] @relation("AssignedTickets")
+  actions        TicketAction[]
+  schedule       Schedule[]
+}
+
+model Room {
+  id        String   @id @default(cuid())
+  name      String   @unique // e.g. "Create Space", "Lecture Room 1"
+  floor     String?
+  building  String?
+  
+  // Relations
+  equipment Equipment[]
+  tickets   Ticket[]
+}
+
+model Equipment {
+  id           String   @id @default(cuid())
+  name         String
+  serialNumber String?
+  type         String? // e.g. "Projector", "PC"
+  status       String   @default("ACTIVE") // ACTIVE, BROKEN, MAINTENANCE
+
+  // Relations
+  roomId       String
+  room         Room     @relation(fields: [roomId], references: [id])
+  tickets      Ticket[]
+}
+
+model Ticket {
+  id          String       @id @default(cuid())
+  title       String
+  description String
+  status      String @default("OPEN") // OPEN, ASSIGNED, IN_PROGRESS, ...
+  urgency     String      @default("LOW") // LOW, MEDIUM, HIGH, CRITICAL
+  category    String?      // Hardware, Software, Network
+  problemType String?      // Specific issue e.g. "CPU Missing", "Login Failed"
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  closedAt    DateTime?
+
+  // Resolution & Feedback
+  solution    String?
+  rating      Int?
+  feedback    String?
+
+  // Location/Item
+  roomId      String
+  room        Room         @relation(fields: [roomId], references: [id])
+  equipmentId String?
+  equipment   Equipment?   @relation(fields: [equipmentId], references: [id])
+
+  // People
+  createdById String
+  createdBy   User         @relation("CreatedTickets", fields: [createdById], references: [id])
+  assignedToId String?
+  assignedTo  User?        @relation("AssignedTickets", fields: [assignedToId], references: [id])
+
+  // History & Evidence
+  actions     TicketAction[]
+  exhibits    RepairExhibit[]
+}
+
+model Schedule {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  startTime DateTime
+  endTime   DateTime
+  type      String   @default("BUSY") // BUSY, EMERGENCY, MEETING
+  details   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TicketAction {
+  id        String   @id @default(cuid())
+  action    String   // e.g. "STATUS_CHANGE", "COMMENT", "ASSIGNED"
+  details   String?  // e.g. "Changed status from OPEN to IN_PROGRESS"
+  timestamp DateTime @default(now())
+
+  // Relations
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  actorId   String
+  actor     User     @relation(fields: [actorId], references: [id])
+}
+
+model KnowledgeBase {
+  id        String            @id @default(cuid())
+  title     String
+  content   String            // Markdown content or URL for video
+  type      String @default("FAQ") // FAQ, GUIDE, VIDEO
+  tags      String?           // Comma separated tags
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+}
+
+model RepairExhibit {
+  id        String   @id @default(cuid())
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  photoUrl  String
+  type      String   // BEFORE, AFTER
+  uploadedAt DateTime @default(now())
+}
